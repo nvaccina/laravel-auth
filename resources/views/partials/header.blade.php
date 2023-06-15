@@ -1,4 +1,4 @@
-<header class="px-5 py-3">
+<header class="px-5 py-3 bg-secondary-subtle mb-4 border-bottom border-black">
     <ul class="nav nav-underline">
         <li class="nav-item">
             <a class="nav-link {{Route::currentRouteName() === 'home' ? 'active' : ''}}" aria-current="page" href="{{route('home')}}">Home</a>

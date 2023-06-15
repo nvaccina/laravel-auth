@@ -15,20 +15,31 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+//Rotte Guest
 Route::get('/', [PageController::class, 'index'])->name('home');
 
 Route::get('/contacts', [PageController::class, 'contacts'])->name('contacts');
 
 Route::get('/news', [PageController::class, 'news'])->name('news');
 
-
+//Rotte Admin
 Route::middleware(['auth', 'verified'])
     ->name('admin.')
     ->prefix('admin')
     ->group(function(){
         Route::get('/',[DashboardController::class, 'index'])->name('home');
 
+        Route::get('/settings',[DashboardController::class, 'settings'])->name('settings');
+
+        Route::get('/stats',[DashboardController::class, 'stats'])->name('stats');
+
     });
+
+//Rotte profilo login
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
 require __DIR__.'/auth.php';
