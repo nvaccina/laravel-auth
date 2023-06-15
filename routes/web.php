@@ -18,6 +18,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PageController::class, 'index'])->name('home');
 
+Route::get('/contacts', [PageController::class, 'contacts'])->name('contacts');
+
+Route::get('/news', [PageController::class, 'news'])->name('news');
+
 
 Route::middleware(['auth', 'verified'])
     ->name('admin.')
