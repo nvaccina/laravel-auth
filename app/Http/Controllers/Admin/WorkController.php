@@ -69,9 +69,9 @@ class WorkController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Work $work)
     {
-        //
+        return view('admin.works.edit', compact('work'));
     }
 
     /**
@@ -81,9 +81,21 @@ class WorkController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(WorkRequest $request, Work $work)
     {
-        //
+        $form_data = $request->all();
+        $date = date_create($work->creation_date);
+        $date_formatted = date_format($date, 'd-m-Y');
+
+        if($work->titolo !== $form_data['title']){
+            $form_data['slug']  = Work::generateSlug($form_data['title']);
+        }else{
+            $form_data['slug']  = $work->slug;
+        }
+
+        $work->update($form_data);
+
+        return view('admin.works.show', compact('work', 'date_formatted'));
     }
 
     /**
@@ -92,8 +104,10 @@ class WorkController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Work $work)
     {
-        //
+        $work->delete();
+
+        return redirect()->route('admin.works.index')->with('deleted', "Il lavoro: \" $work->title \" è stato eliminato correttamente");
     }
 }

@@ -26,9 +26,25 @@
                             <a class="btn btn-primary" href="{{route('admin.works.show', $work)}}">
                                 <i class="fa-solid fa-info p-1"></i>
                             </a>
-                            <a class="btn btn-warning" href="#">
+                            <a class="btn btn-warning" href="{{route('admin.works.edit', $work)}}">
                                 <i class="fa-solid fa-pen"></i>
                             </a>
+                            <form
+                                action="{{route('admin.works.destroy', $work)}}"
+                                method="POST"
+                                class="d-inline"
+                                onsubmit="return confirm ('Sei sicuro di voler eliminare il fumetto {{$work->title}}?')"
+                            >
+                                @csrf
+                                @method('DELETE')
+                                <button
+                                    type="submit"
+                                    class="btn btn-danger"
+                                    title="Elimina"
+                                >
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </button>
+                        </form>
 
                         </td>
                     </tr>
