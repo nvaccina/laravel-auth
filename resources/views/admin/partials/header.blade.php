@@ -1,5 +1,5 @@
 <header class="bg-dark">
-    <nav class="navbar navbar-expand-md navbar-dark">
+    <nav class="navbar navbar-expand-md navbar-dark py-3">
         <div class="container-fluid px-5">
             <a class="navbar-brand d-flex align-items-center" href="{{route('admin.home')}}">
                 BOOLFOLIO
@@ -17,15 +17,12 @@
                     </li>
                     @auth
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('admin.settings')}}">Settings</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('admin.stats')}}">Stats</a>
+                            <a class="nav-link" href="{{route('admin.settings')}}">Impostazioni</a>
                         </li>
                     @endauth
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('contacts') }}"> Contacts</a>
+                        <a class="nav-link" href="{{ route('contacts') }}"> Contatti</a>
                     </li>
                 </ul>
 
@@ -45,7 +42,7 @@
                     <li class="nav-item">
                         <form id="logout-form" action="{{ route('logout') }}" method="POST">
                             @csrf
-                            <button class="btn btn-primary" type="submit">LOGOUT <i class=" ms-1 fa-solid fa-arrow-right-from-bracket"></i></button>
+                            <button class="btn btn-sm btn-outline-light" type="submit">LOGOUT <i class=" ms-1 fa-solid fa-arrow-right-from-bracket"></i></button>
                         </form>
                     </li>
                     @endguest

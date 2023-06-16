@@ -15,5 +15,10 @@
                 <i class="pe-2 fa-regular fa-square-plus"></i> New Work
             </a>
         </li>
+        <li class="py-2">
+            <a href="{{route('admin.stats')}}">
+                <i class="pe-2 fa-solid fa-chart-column"></i>Statistiche
+            </a>
+        </li>
     </ul>
 </aside>

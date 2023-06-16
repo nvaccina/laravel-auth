@@ -2,8 +2,6 @@
 
 @section('content')
 
-@include('partials.header')
-
     <div class="container py-5">
         <h1>CONTACTS</h1>
 
