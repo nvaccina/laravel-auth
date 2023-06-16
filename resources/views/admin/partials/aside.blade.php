@@ -6,13 +6,8 @@
             </a>
         </li>
         <li class="py-2">
-            <a href="#">
-                <i class="pe-2 fa-regular fa-folder"></i>Portfolio
-            </a>
-        </li>
-        <li class="py-2">
-            <a href="#">
-                <i class="pe-2 fa-regular fa-square-plus"></i>New Portfolio
+            <a href="{{route('admin.works.index')}}">
+                <i class="pe-2 fa-regular fa-folder"></i>Works
             </a>
         </li>
         <li class="py-2">

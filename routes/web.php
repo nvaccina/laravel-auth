@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\WorkController;
 use App\Http\Controllers\Guest\PageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,8 @@ Route::middleware(['auth', 'verified'])
         Route::get('/settings',[DashboardController::class, 'settings'])->name('settings');
 
         Route::get('/stats',[DashboardController::class, 'stats'])->name('stats');
+
+        Route::resource('works', WorkController::class);
 
     });
 
