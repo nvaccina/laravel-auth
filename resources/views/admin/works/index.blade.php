@@ -17,10 +17,13 @@
                 @foreach ($works as $work)
                     <tr>
                         <td>{{$work->id}}</td>
-                        <td>{{$work->title}}</td>
-                        <td>{{$work->creation_date}}</td>
+                        <td class="w-50">{{$work->title}}</td>
+                        @php
+                            $date = date_create($work->creation_date)
+                        @endphp
+                        <td>{{date_format($date, 'd-m-Y')}}</td>
                         <td>
-                            <a class="btn btn-primary" href="#">
+                            <a class="btn btn-primary" href="{{route('admin.works.show', $work)}}">
                                 <i class="fa-solid fa-info p-1"></i>
                             </a>
                             <a class="btn btn-warning" href="#">
@@ -33,5 +36,8 @@
 
             </tbody>
         </table>
+        <div>
+            {{$works->links()}}
+        </div>
     </div>
 @endsection

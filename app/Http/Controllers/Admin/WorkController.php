@@ -15,7 +15,7 @@ class WorkController extends Controller
      */
     public function index()
     {
-        $works = Work::all();
+        $works = Work::paginate(10);
 
         return view('admin.works.index', compact('works'));
     }
@@ -47,9 +47,11 @@ class WorkController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Work $work)
     {
-        //
+        $date = date_create($work->creation_date);
+        $date_formatted = date_format($date, 'd-m-Y');
+        return view('admin.works.show', compact('work', 'date_formatted'));
     }
 
     /**
