@@ -10,6 +10,15 @@ class Work extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'title',
+        'slug',
+        'image',
+        'text',
+        'creation_date'
+    ];
+
+
     public static function generateSlug($str){
 
         $slug = Str::slug($str, '-');

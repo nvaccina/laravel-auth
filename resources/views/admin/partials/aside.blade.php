@@ -11,7 +11,7 @@
             </a>
         </li>
         <li class="py-2">
-            <a href="#">
+            <a href="{{route('admin.works.create')}}">
                 <i class="pe-2 fa-regular fa-square-plus"></i> New Work
             </a>
         </li>

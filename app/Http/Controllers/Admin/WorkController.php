@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\WorkRequest;
 use Illuminate\Http\Request;
 use App\Models\Work;
 
@@ -27,7 +28,7 @@ class WorkController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.works.create');
     }
 
     /**
@@ -36,9 +37,17 @@ class WorkController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(WorkRequest $request)
     {
-        //
+        $form_data = $request->all();
+        $form_data['slug'] = Work::generateSlug($form_data['title']);
+        $form_data['creation_date'] = date('Y-m-d');
+
+        $new_work = new Work;
+        $new_work->fill($form_data);
+        $new_work->save();
+
+        return redirect()->route('admin.works.show', $new_work);
     }
 
     /**
