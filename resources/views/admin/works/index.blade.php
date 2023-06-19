@@ -35,22 +35,9 @@
                             <a class="btn btn-warning" href="{{route('admin.works.edit', $work)}}">
                                 <i class="fa-solid fa-pen"></i>
                             </a>
-                            <form
-                                action="{{route('admin.works.destroy', $work)}}"
-                                method="POST"
-                                class="d-inline"
-                                onsubmit="return confirm ('Sei sicuro di voler eliminare il lavoro: {{$work->title}}?')"
-                            >
-                                @csrf
-                                @method('DELETE')
-                                <button
-                                    type="submit"
-                                    class="btn btn-danger"
-                                    title="Elimina"
-                                >
-                                    <i class="fa-solid fa-trash-can"></i>
-                                </button>
-                        </form>
+
+                            @include('admin.partials.form-delete')
+
 
                         </td>
                     </tr>
