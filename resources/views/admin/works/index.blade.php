@@ -4,6 +4,12 @@
     <div class="container p-5">
         <h1 class="text-secondary mb-4">Portfolio</h1>
 
+        @if (session('deleted'))
+            <div class="alert alert-success" role="alert">
+                {{session('deleted')}}
+            </div>
+        @endif
+
         <table class="table">
             <thead>
                 <tr>
@@ -33,7 +39,7 @@
                                 action="{{route('admin.works.destroy', $work)}}"
                                 method="POST"
                                 class="d-inline"
-                                onsubmit="return confirm ('Sei sicuro di voler eliminare il fumetto {{$work->title}}?')"
+                                onsubmit="return confirm ('Sei sicuro di voler eliminare il lavoro: {{$work->title}}?')"
                             >
                                 @csrf
                                 @method('DELETE')

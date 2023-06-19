@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\WorkRequest;
 use Illuminate\Http\Request;
 use App\Models\Work;
+use Illuminate\Support\Facades\Storage;
 
 class WorkController extends Controller
 {
@@ -26,9 +27,9 @@ class WorkController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Work $work)
     {
-        return view('admin.works.create');
+        return view('admin.works.create', compact('work'));
     }
 
     /**
@@ -42,6 +43,12 @@ class WorkController extends Controller
         $form_data = $request->all();
         $form_data['slug'] = Work::generateSlug($form_data['title']);
         $form_data['creation_date'] = date('Y-m-d');
+
+        if(array_key_exists('image', $form_data)){
+
+            $form_data['image_original_name'] = $request->file('image')->getClientOriginalName();
+            $form_data['image'] = Storage::put('uploads/', $form_data['image']);
+        }
 
         $new_work = new Work;
         $new_work->fill($form_data);
@@ -92,6 +99,17 @@ class WorkController extends Controller
         }else{
             $form_data['slug']  = $work->slug;
         }
+        $form_data['creation_date'] = date('Y-m-d');
+
+        if($request->hasFile('image')) {
+
+            if($work->image){
+                Storage::disk('public')->delete($work->image);
+            }
+
+            $form_data['image_original_name'] = $request->file('image')->getClientOriginalName();
+            $form_data['image'] = Storage::put('uploads/', $form_data['image']);
+        }
 
         $work->update($form_data);
 
@@ -106,6 +124,10 @@ class WorkController extends Controller
      */
     public function destroy(Work $work)
     {
+        if($work->image){
+            Storage::disk('public')->delete($work->image);
+        }
+
         $work->delete();
 
         return redirect()->route('admin.works.index')->with('deleted', "Il lavoro: \" $work->title \" è stato eliminato correttamente");

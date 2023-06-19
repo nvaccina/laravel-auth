@@ -14,6 +14,7 @@ class Work extends Model
         'title',
         'slug',
         'image',
+        'image_original_name',
         'text',
         'creation_date'
     ];

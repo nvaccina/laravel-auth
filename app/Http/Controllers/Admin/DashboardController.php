@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Work;
 
 class DashboardController extends Controller
 {
     public function index(){
-        return view('admin.home');
+        $n_works = Work::all()->count();
+        return view('admin.home', compact('n_works'));
     }
 
     public function settings(){
