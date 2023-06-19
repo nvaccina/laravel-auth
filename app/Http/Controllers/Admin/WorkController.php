@@ -130,6 +130,6 @@ class WorkController extends Controller
 
         $work->delete();
 
-        return redirect()->route('admin.works.index')->with('deleted', "Il lavoro: \" $work->title \" è stato eliminato correttamente");
+        return redirect()->route('admin.works.index')->with('deleted', "Il lavoro: \" $work->title \" è stato eliminato correttamente!");
     }
 }
